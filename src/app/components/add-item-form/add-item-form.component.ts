@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { BudgetItem } from 'src/shared/models/budget-item-models';
 
 @Component({
   selector: 'app-add-item-form',
@@ -7,4 +9,10 @@ import { Component } from '@angular/core';
 })
 export class AddItemFormComponent {
 
+  @Input() item: BudgetItem = new BudgetItem('', 0);
+
+  @Output() formSubmit: EventEmitter<BudgetItem> = new EventEmitter<BudgetItem>();
+  onSubmit(form: NgForm) {
+    this.formSubmit.emit(form.value);
+  }
 }
